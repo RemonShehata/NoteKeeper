@@ -31,10 +31,10 @@ public class NoteListActivity extends AppCompatActivity {
             }
         });
 
-        intializeDiplayContent();
+        initializeDisplayContent();
     }
 
-    private void intializeDiplayContent() {
+    private void initializeDisplayContent() {
         final ListView listNotes = findViewById(R.id.list_notes);
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
