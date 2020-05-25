@@ -37,7 +37,7 @@ public class NoteListActivity extends AppCompatActivity {
     }
 
     private void intializeDiplayContent() {
-        ListView listNotes = findViewById(R.id.list_notes);
+        final ListView listNotes = findViewById(R.id.list_notes);
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
 
@@ -49,6 +49,8 @@ public class NoteListActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent = new Intent(NoteListActivity.this, NoteActivity.class);
+                NoteInfo note = (NoteInfo) listNotes.getItemAtPosition(position);
+                intent.putExtra(NoteActivity.NOTE_INFO, note);
                 startActivity(intent);
             }
         });

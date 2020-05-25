@@ -1,5 +1,6 @@
 package iti.intake40.notekeeper;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +13,9 @@ import androidx.appcompat.widget.Toolbar;
 import java.util.List;
 
 public class NoteActivity extends AppCompatActivity {
+
+    public static final String NOTE_INFO = "iti.intake40.notekeeper.NOTE_INFO";
+    private NoteInfo mNote;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +34,8 @@ public class NoteActivity extends AppCompatActivity {
         adapterCourses.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinnerCourses.setAdapter(adapterCourses);
+
+        readDisplayStateValues();
     }
 
     @Override
@@ -52,5 +58,10 @@ public class NoteActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    private void readDisplayStateValues() {
+        Intent intent = getIntent();
+        mNote = intent.getParcelableExtra(NOTE_INFO);
     }
 }
