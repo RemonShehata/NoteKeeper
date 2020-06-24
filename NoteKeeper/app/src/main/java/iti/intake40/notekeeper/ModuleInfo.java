@@ -69,7 +69,7 @@ public final class ModuleInfo implements Parcelable {
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeString(mModuleId);
         dest.writeString(mTitle);
-        dest.writeByte((byte)(mIsComplete ? 1 : 0));
+        dest.writeByte((byte) (mIsComplete ? 1 : 0));
     }
 
     public static final Creator<ModuleInfo> CREATOR =
