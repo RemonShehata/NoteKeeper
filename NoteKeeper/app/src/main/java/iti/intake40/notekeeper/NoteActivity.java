@@ -2,6 +2,7 @@ package iti.intake40.notekeeper;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -19,6 +20,7 @@ public class NoteActivity extends AppCompatActivity {
 
     public static final String NOTE_POSITION = "iti.intake40.notekeeper.NOTE_POSITION";
     public static final int POSITION_NOT_SET = -1;
+    private final String TAG = getClass().getSimpleName();
     private NoteInfo mNote;
     private boolean mIsNewNote;
     private Spinner mSpinnerCourses;
@@ -65,6 +67,8 @@ public class NoteActivity extends AppCompatActivity {
         if (!mIsNewNote) {
             displayNotes(mSpinnerCourses, mTextNoteTitle, mTextNoteText);
         }
+
+        Log.d(TAG, "onCreate");
     }
 
     private void saveOriginalNoteValues() {
@@ -81,6 +85,7 @@ public class NoteActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         if (mIsCanelling) {
+            Log.i(TAG, "Cancelling note at position: " + mNotePosition);
             if (mIsNewNote) {
                 DataManager.getInstance().removeNote(mNotePosition);
             } else {
@@ -89,6 +94,8 @@ public class NoteActivity extends AppCompatActivity {
         } else {
             saveNote();
         }
+
+        Log.d(TAG, "onPause");
     }
 
     @Override
@@ -171,6 +178,7 @@ public class NoteActivity extends AppCompatActivity {
             createNewNote();
         }
 
+        Log.i(TAG, "mNote positon: " + mNotePosition);
         mNote = DataManager.getInstance().getNotes().get(mNotePosition);
     }
 
