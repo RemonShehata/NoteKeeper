@@ -9,6 +9,9 @@ public class DataManager {
     private List<CourseInfo> mCourses = new ArrayList<>();
     private List<NoteInfo> mNotes = new ArrayList<>();
 
+    private DataManager() {
+    }
+
     public static DataManager getInstance() {
         if (ourInstance == null) {
             ourInstance = new DataManager();
@@ -77,9 +80,6 @@ public class DataManager {
                 count++;
         }
         return count;
-    }
-
-    private DataManager() {
     }
 
     //region Initialization code

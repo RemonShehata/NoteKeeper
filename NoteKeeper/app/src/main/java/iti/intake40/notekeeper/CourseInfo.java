@@ -1,6 +1,5 @@
 package iti.intake40.notekeeper;
 
-import android.database.Cursor;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -8,6 +7,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 public final class CourseInfo implements Parcelable {
+    public static final Creator<CourseInfo> CREATOR =
+            new Creator<CourseInfo>() {
+
+                @Override
+                public CourseInfo createFromParcel(Parcel source) {
+                    return new CourseInfo(source);
+                }
+
+                @Override
+                public CourseInfo[] newArray(int size) {
+                    return new CourseInfo[size];
+                }
+            };
     private final String mCourseId;
     private final String mTitle;
     private final List<ModuleInfo> mModules;
@@ -91,19 +103,5 @@ public final class CourseInfo implements Parcelable {
         dest.writeString(mTitle);
         dest.writeTypedList(mModules);
     }
-
-    public static final Creator<CourseInfo> CREATOR =
-            new Creator<CourseInfo>() {
-
-                @Override
-                public CourseInfo createFromParcel(Parcel source) {
-                    return new CourseInfo(source);
-                }
-
-                @Override
-                public CourseInfo[] newArray(int size) {
-                    return new CourseInfo[size];
-                }
-            };
 
 }

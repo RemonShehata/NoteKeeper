@@ -12,6 +12,7 @@ public class NoteActivityViewModel extends ViewModel {
     public String mOriginalNoteCourseId;
     public String mOriginalNoteTitle;
     public String mOriginalNoteText;
+    public boolean mIsNewlyCreated = true;
 
     public void saveState(Bundle outState) {
         outState.putString(ORIGINAL_NOTE_COURSE_ID, mOriginalNoteCourseId);

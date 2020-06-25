@@ -2,7 +2,6 @@ package iti.intake40.notekeeper;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -41,9 +40,11 @@ public class NoteActivity extends AppCompatActivity {
 
         mViewModel = viewModelProvider.get(NoteActivityViewModel.class);
 
-        if (savedInstanceState != null) {
+        if (mViewModel.mIsNewlyCreated && savedInstanceState != null) {
             mViewModel.restoreState(savedInstanceState);
         }
+
+        mViewModel.mIsNewlyCreated = false;
 
         mSpinnerCourses = findViewById(R.id.spinner_courses);
 
@@ -168,14 +169,14 @@ public class NoteActivity extends AppCompatActivity {
 
         if (mIsNewNote) {
             createNewNote();
-        } else {
-            mNote = DataManager.getInstance().getNotes().get(position);
         }
+
+        mNote = DataManager.getInstance().getNotes().get(position);
     }
 
     private void createNewNote() {
         DataManager dm = DataManager.getInstance();
         mNotePosition = dm.createNewNote();
-        mNote = dm.getNotes().get(mNotePosition);
+//        mNote = dm.getNotes().get(mNotePosition);
     }
 }
