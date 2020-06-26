@@ -10,12 +10,12 @@ public class DataManagerTest {
     static DataManager sDataManger;
 
     @BeforeClass
-    public static void classSetUp(){
+    public static void classSetUp() {
         sDataManger = DataManager.getInstance();
     }
 
     @Before
-    public void setUp(){
+    public void setUp() {
         sDataManger.getNotes().clear();
         sDataManger.initializeExampleNotes();
     }
@@ -39,7 +39,7 @@ public class DataManagerTest {
     }
 
     @Test
-    public void findSimilarNotes(){
+    public void findSimilarNotes() {
         final CourseInfo course = sDataManger.getCourse("android_async");
         final String noteTitle = "Test note title";
         final String noteText1 = "This is a text body of my test note";
@@ -62,5 +62,19 @@ public class DataManagerTest {
 
         int foundIndex2 = sDataManger.findNote(newNote2);
         Assert.assertEquals(noteIndex2, foundIndex2);
+    }
+
+    @Test
+    public void createNewNoteOneStepCreation() {
+        final CourseInfo course = sDataManger.getCourse("android_async");
+        final String noteTitle = "Test note title";
+        final String noteText = "This is a text body of my test note";
+
+        int noteIndex = sDataManger.createNewNote(course, noteTitle, noteText);
+
+        NoteInfo compareNote = sDataManger.getNotes().get(noteIndex);
+        Assert.assertEquals(course, compareNote.getCourse());
+        Assert.assertEquals(noteTitle, compareNote.getTitle());
+        Assert.assertEquals(noteText, compareNote.getText());
     }
 }
