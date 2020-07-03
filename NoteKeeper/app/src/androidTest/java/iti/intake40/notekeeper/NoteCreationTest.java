@@ -27,15 +27,14 @@ import static org.junit.Assert.assertEquals;
 @RunWith(AndroidJUnit4.class)
 public class NoteCreationTest {
     public static DataManager sDataManger;
+    @Rule
+    public ActivityTestRule<NoteListActivity> mNoteListActivityRule =
+            new ActivityTestRule<>(NoteListActivity.class);
 
     @BeforeClass
     public static void classSetUp() {
         sDataManger = DataManager.getInstance();
     }
-
-    @Rule
-    public ActivityTestRule<NoteListActivity> mNoteListActivityRule =
-            new ActivityTestRule<>(NoteListActivity.class);
 
     @Test
     public void createNewNote() {
