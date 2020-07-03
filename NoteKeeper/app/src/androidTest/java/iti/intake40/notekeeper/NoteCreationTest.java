@@ -14,8 +14,12 @@ import static androidx.test.espresso.Espresso.pressBack;
 import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.action.ViewActions.closeSoftKeyboard;
 import static androidx.test.espresso.action.ViewActions.typeText;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static androidx.test.espresso.matcher.ViewMatchers.withSpinnerText;
+import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
 
@@ -44,10 +48,16 @@ public class NoteCreationTest {
 
         onView(withId(R.id.spinner_courses)).perform(click());
         onData(allOf(instanceOf(CourseInfo.class), equalTo(course))).perform(click());
-        onView(withId(R.id.text_note_title)).perform(typeText(noteTitle));
+        onView(withId(R.id.spinner_courses)).check(matches(withSpinnerText(
+                containsString(course.getTitle()))));   
+
+        onView(withId(R.id.text_note_title)).perform(typeText(noteTitle))
+                .check(matches(withText(containsString(noteTitle))));
         onView(withId(R.id.text_note_text))
                 .perform(typeText(noteText),
                         closeSoftKeyboard());
+
+        onView(withId(R.id.text_note_text)).check(matches(withText(containsString(noteText))));
 
         pressBack();
     }
