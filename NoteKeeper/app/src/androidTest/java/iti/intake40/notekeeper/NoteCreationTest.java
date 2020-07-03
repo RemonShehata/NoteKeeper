@@ -22,6 +22,7 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.instanceOf;
+import static org.junit.Assert.assertEquals;
 
 @RunWith(AndroidJUnit4.class)
 public class NoteCreationTest {
@@ -49,7 +50,7 @@ public class NoteCreationTest {
         onView(withId(R.id.spinner_courses)).perform(click());
         onData(allOf(instanceOf(CourseInfo.class), equalTo(course))).perform(click());
         onView(withId(R.id.spinner_courses)).check(matches(withSpinnerText(
-                containsString(course.getTitle()))));   
+                containsString(course.getTitle()))));
 
         onView(withId(R.id.text_note_title)).perform(typeText(noteTitle))
                 .check(matches(withText(containsString(noteTitle))));
@@ -60,6 +61,12 @@ public class NoteCreationTest {
         onView(withId(R.id.text_note_text)).check(matches(withText(containsString(noteText))));
 
         pressBack();
+
+        int noteIndex = sDataManger.getNotes().size() - 1;
+        NoteInfo note = sDataManger.getNotes().get(noteIndex);
+        assertEquals(course, note.getCourse());
+        assertEquals(noteTitle, note.getTitle());
+        assertEquals(noteText, note.getText());
     }
 
 }
