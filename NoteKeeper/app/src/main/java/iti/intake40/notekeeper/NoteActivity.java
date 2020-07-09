@@ -150,7 +150,7 @@ public class NoteActivity extends AppCompatActivity {
         } else if (id == R.id.action_cancel) {
             mIsCanelling = true;
             finish();
-        } else if (id == R.id.action_move_next){
+        } else if (id == R.id.action_move_next) {
             moveNext();
         }
 
@@ -158,7 +158,14 @@ public class NoteActivity extends AppCompatActivity {
     }
 
     private void moveNext() {
-        
+        saveNote();
+
+        ++mNotePosition;
+
+        mNote = DataManager.getInstance().getNotes().get(mNotePosition);
+
+        saveOriginalNoteValues();
+        displayNotes(mSpinnerCourses, mTextNoteTitle, mTextNoteText);
     }
 
     private void sendEmail() {
