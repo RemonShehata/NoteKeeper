@@ -16,8 +16,6 @@ import java.util.List;
 public class NoteListActivity extends AppCompatActivity {
     private NoteRecyclerAdapter mNoteRecyclerAdapter;
 
-    //private ArrayAdapter<NoteInfo> mAdapterNotes;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

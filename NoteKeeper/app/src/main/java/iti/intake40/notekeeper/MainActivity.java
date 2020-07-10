@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.navigation.ui.AppBarConfiguration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -24,10 +23,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    private AppBarConfiguration mAppBarConfiguration;
     private ActionBarDrawerToggle toggle;
     private NoteRecyclerAdapter mNoteRecyclerAdapter;
-    private RecyclerView recyclerNotes;
     private RecyclerView mRecyclerItems;
     private LinearLayoutManager mNotesLayoutManger;
     private NavigationView mNavigationView;
