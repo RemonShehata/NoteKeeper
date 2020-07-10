@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     private AppBarConfiguration mAppBarConfiguration;
     private ActionBarDrawerToggle toggle;
     private NoteRecyclerAdapter mNoteRecyclerAdapter;
+    private RecyclerView recyclerNotes;
+    private RecyclerView mRecyclerItems;
+    private LinearLayoutManager mNotesLayoutManger;
+    private NavigationView mNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,9 +53,9 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
 
         toggle.syncState();
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        
+        mNavigationView = findViewById(R.id.nav_view);
+        mNavigationView.setNavigationItemSelectedListener(this);
+
         initializeDisplayContent();
     }
 
@@ -80,13 +84,20 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     private void initializeDisplayContent() {
 
-        final RecyclerView recyclerNotes = findViewById(R.id.list_items);
-        LinearLayoutManager notesLayoutManger = new LinearLayoutManager(this);
-        recyclerNotes.setLayoutManager(notesLayoutManger);
+        mRecyclerItems = findViewById(R.id.list_items);
+        mNotesLayoutManger = new LinearLayoutManager(this);
 
         List<NoteInfo> notes = DataManager.getInstance().getNotes();
         mNoteRecyclerAdapter = new NoteRecyclerAdapter(this, notes);
-        recyclerNotes.setAdapter(mNoteRecyclerAdapter);
+        displayNotes();
+    }
+
+    private void displayNotes() {
+        mRecyclerItems.setLayoutManager(mNotesLayoutManger);
+        mRecyclerItems.setAdapter(mNoteRecyclerAdapter);
+
+        Menu menu = mNavigationView.getMenu();
+        menu.findItem(R.id.nav_notes).setChecked(true);
     }
 
     @Override
@@ -94,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         int id = item.getItemId();
 
         if (id == R.id.nav_notes) {
-            handleSelection("Notes");
+            displayNotes();
         } else if (id == R.id.nav_courses) {
             handleSelection("Courses");
         } else if (id == R.id.nav_share) {
