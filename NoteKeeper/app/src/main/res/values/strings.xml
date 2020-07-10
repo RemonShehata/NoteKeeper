@@ -24,4 +24,8 @@
     <string name="menu_import">Menu</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_comunications">Comunications</string>
+    <string name="Notes">Notes</string>
+    <string name="courses">Courses</string>
+    <string name="share">Share</string>
+    <string name="send">Send</string>
 </resources>
